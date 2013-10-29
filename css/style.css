@@ -99,3 +99,6 @@ div strong{
 strong + input{
   font-size: 46px;
 }
+li{
+  background-color: blueviolet;
+}
