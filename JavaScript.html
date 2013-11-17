@@ -43,5 +43,13 @@
       <input name='vyvod' type="text" />
     </FORM>
     <a href='#' id='our-href' onclick="strannoe_zadani_e();return false;">Наша гиперссылка (Russia)</a>
+    <script>
+      var our_href = document.getElementById("our-href");
+      our_href.style.backgroundColor = 'red';
+      var inputs = document.getElementsByTagName('input');
+      for (var i in inputs){
+        console.log(inputs[i].value);
+      }
+    </script>
   </body>
 </html>
