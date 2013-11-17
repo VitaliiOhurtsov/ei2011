@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <style>
+      [name="vyvod"]{
+        font-size: 20px;
+        width: 100%;
+      }
+    </style>
+    <script type="text/javascript" src='js/lr4.js'></script>
+    <script>
+      var key_press_count = 0;
+      var first_letter = ["о","д","т","ч","п","ш","с","в","д"];
+      var week_days = ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
+      var months = ['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
+      var current_date = new Date();
+      /* setInterval(function() {
+        var d = new Date();
+        var curr_time = d.getHours()
+                + ':' + d.getMinutes()
+                + ':' + d.getSeconds();
+        console.log(curr_time);
+        console.log(curr_time+" - "+week_days[d.getDay()]);
+      }, 1000); */
+      function my_life_days(birthdate) {
+        var now = new Date();
+        var days = (now - birthdate) / (1000 * 60 * 60 * 24);
+        return Math.round(days);
+      }
+    </script>
+  </head>
+  <body onload="alert(days_to_sunday(new Date()));">
+    <div>TODO write content</div>
+    <FORM METHOD="post" NAME="form"
+          ACTION="JavaScript:form.e.value='Я прожил: '+my_life_days(new Date(1978,2,14));void(0);">
+      <INPUT TYPE="text" NAME="e" SIZE="30" VALUE=""><BR>
+      <INPUT TYPE="submit" name='zap' VALUE="Отправить">
+      <INPUT TYPE="reset" VALUE="Очистить">
+      <input type="button" onblur="console.log(months[current_date.getMonth()])" value="Текущий месяц" >
+      <input name='vyvod' type="text" />
+    </FORM>
+    <a href='#' id='our-href' onclick="strannoe_zadani_e();return false;">Наша гиперссылка (Russia)</a>
+  </body>
+</html>
