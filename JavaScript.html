@@ -10,46 +10,110 @@
         width: 100%;
       }
     </style>
+    <script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
     <script type="text/javascript" src='js/lr4.js'></script>
     <script>
       var key_press_count = 0;
-      var first_letter = ["о","д","т","ч","п","ш","с","в","д"];
-      var week_days = ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
-      var months = ['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
+      var first_letter = ["о", "д", "т", "ч", "п", "ш", "с", "в", "д"];
+      var week_days = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
+      var months = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'];
       var current_date = new Date();
       /* setInterval(function() {
-        var d = new Date();
-        var curr_time = d.getHours()
-                + ':' + d.getMinutes()
-                + ':' + d.getSeconds();
-        console.log(curr_time);
-        console.log(curr_time+" - "+week_days[d.getDay()]);
-      }, 1000); */
+       var d = new Date();
+       var curr_time = d.getHours()
+       + ':' + d.getMinutes()
+       + ':' + d.getSeconds();
+       console.log(curr_time);
+       console.log(curr_time+" - "+week_days[d.getDay()]);
+       }, 1000); */
       function my_life_days(birthdate) {
         var now = new Date();
         var days = (now - birthdate) / (1000 * 60 * 60 * 24);
         return Math.round(days);
       }
     </script>
-  </head>
-  <body onload="alert(days_to_sunday(new Date()));">
-    <div>TODO write content</div>
+    <style>
+      #left-column{
+        width: 200px;
+        border: 1px solid #ddd;
+        padding: 5px;
+        float: left;
+        
+      }
+      .block{
+        border: 3px solid #eee;
+        border-radius: 5px;
+      }
+      .block h2{
+        background: lightsteelblue;
+        margin: 0px;
+        padding: 5px;
+      }
+    </style>
+  </head><body onload="alert(days_to_sunday(new Date()));">
+    <div id="left-column">
+      <div class="block">
+        <h2>Заголовок 1</h2>
+        <div class="block-content">
+          какой-то кнтент
+        </div>
+      </div>
+      <div class="block">
+        <h2>Заголовок 2</h2>
+      </div>
+      <div class="block">
+        <h2>Контакты</h2>
+        <div class="block-content">
+          <ul>
+            <li>001-01-01</li>
+            <li>002-02-02</li>
+            <li>003-03-03</li>
+            <li>004-04-04</li>
+            <li>005-05-05</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="d1">TODO write content</div>
+    <div id="b1">Кнопка</div>
     <FORM METHOD="post" NAME="form"
           ACTION="JavaScript:form.e.value='Я прожил: '+my_life_days(new Date(1978,2,14));void(0);">
-      <INPUT TYPE="text" NAME="e" SIZE="30" VALUE=""><BR>
-      <INPUT TYPE="submit" name='zap' VALUE="Отправить">
-      <INPUT TYPE="reset" VALUE="Очистить">
-      <input type="button" onblur="console.log(months[current_date.getMonth()])" value="Текущий месяц" >
-      <input name='vyvod' type="text" />
+      <p>      <INPUT class="i55" TYPE="text" NAME="e" SIZE="30" VALUE="другой инпут"><BR>
+        <INPUT TYPE="submit" name='zap' VALUE="Отправить">
+        <INPUT class="i55" TYPE="reset" VALUE="Очистить">
+      </p>
+      <input class="i55" type="button" onblur="console.log(months[current_date.getMonth()])" value="Текущий месяц" >
+      <input class="i55" name='vyvod' type="text" value="Один инпут" />
     </FORM>
-    <a href='#' id='our-href' onclick="strannoe_zadani_e();return false;">Наша гиперссылка (Russia)</a>
+    <a href='#' id='our-href' onclick="strannoe_zadani_e();
+        return false;">Наша гиперссылка (Russia)</a>
     <script>
-      var our_href = document.getElementById("our-href");
+      // p > input.i55
+/*      var our_href = document.getElementById("our-href");
       our_href.style.backgroundColor = 'red';
-      var inputs = document.getElementsByTagName('input');
-      for (var i in inputs){
-        console.log(inputs[i].value);
+      var ps = document.getElementsByTagName('p');
+      for (var ip in ps) {
+        if (ps[ip].nodeName == 'P') {
+          var inputs = ps[ip].getElementsByTagName('input');
+          for (var i in inputs) {
+            if (inputs[i].className == 'i55') {
+              console.log(inputs[i].value);
+            }
+          }
+        }
       }
+      var d1 = document.getElementById("d1");
+      var b1 = document.getElementById("b1");
+      b1.onclick = function() {
+        d1.innerHTML += '<strong>Ура</strong>, получилось!!!';
+      };*/
+      jQuery('p>input.i55').each(function(){
+        console.log(jQuery(this).val());
+      });
+      jQuery('.block > h2').click(function(){
+        jQuery(this).next().slideToggle();
+      });
+      //e1.parentNode.removeChild(e1);
     </script>
   </body>
 </html>
