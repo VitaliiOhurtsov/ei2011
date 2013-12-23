@@ -10,7 +10,11 @@
         width: 100%;
       }
     </style>
-    <script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <!--script src="js/jquery-1.9.1.min.js" type="text/javascript"></script-->
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+
     <script type="text/javascript" src='js/lr4.js'></script>
     <script>
       var key_press_count = 0;
@@ -38,11 +42,12 @@
         border: 1px solid #ddd;
         padding: 5px;
         float: left;
-        
+
       }
       .block{
         border: 3px solid #eee;
         border-radius: 5px;
+        overflow: hidden;
       }
       .block h2{
         background: lightsteelblue;
@@ -75,7 +80,7 @@
       </div>
     </div>
     <div id="d1">TODO write content</div>
-    <div id="b1">Кнопка</div>
+
     <FORM METHOD="post" NAME="form"
           ACTION="JavaScript:form.e.value='Я прожил: '+my_life_days(new Date(1978,2,14));void(0);">
       <p>      <INPUT class="i55" TYPE="text" NAME="e" SIZE="30" VALUE="другой инпут"><BR>
@@ -85,35 +90,52 @@
       <input class="i55" type="button" onblur="console.log(months[current_date.getMonth()])" value="Текущий месяц" >
       <input class="i55" name='vyvod' type="text" value="Один инпут" />
     </FORM>
+    <div id="b1">Свернуть/развернуть все</div>
     <a href='#' id='our-href' onclick="strannoe_zadani_e();
         return false;">Наша гиперссылка (Russia)</a>
     <script>
       // p > input.i55
-/*      var our_href = document.getElementById("our-href");
-      our_href.style.backgroundColor = 'red';
-      var ps = document.getElementsByTagName('p');
-      for (var ip in ps) {
-        if (ps[ip].nodeName == 'P') {
-          var inputs = ps[ip].getElementsByTagName('input');
-          for (var i in inputs) {
-            if (inputs[i].className == 'i55') {
-              console.log(inputs[i].value);
-            }
-          }
-        }
-      }
-      var d1 = document.getElementById("d1");
-      var b1 = document.getElementById("b1");
-      b1.onclick = function() {
-        d1.innerHTML += '<strong>Ура</strong>, получилось!!!';
-      };*/
-      jQuery('p>input.i55').each(function(){
+      /*      var our_href = document.getElementById("our-href");
+       our_href.style.backgroundColor = 'red';
+       var ps = document.getElementsByTagName('p');
+       for (var ip in ps) {
+       if (ps[ip].nodeName == 'P') {
+       var inputs = ps[ip].getElementsByTagName('input');
+       for (var i in inputs) {
+       if (inputs[i].className == 'i55') {
+       console.log(inputs[i].value);
+       }
+       }
+       }
+       }
+       var d1 = document.getElementById("d1");
+       var b1 = document.getElementById("b1");
+       b1.onclick = function() {
+       d1.innerHTML += '<strong>Ура</strong>, получилось!!!';
+       };*/
+      jQuery('p>input.i55').each(function() {
         console.log(jQuery(this).val());
       });
-      jQuery('.block > h2').click(function(){
-        jQuery(this).next().slideToggle();
+      // Сохраняем начальную ширину каждого блока
+      jQuery('.block').each(function() {
+                jQuery(this).attr('begin-width', jQuery(this).width());
+      });
+      // Устанавливаем обработчики события click (сворачивание/разворачивание по горизонтали)
+      jQuery('.block > h2').toggle(function() {
+        //jQuery(this).next().slideToggle().css({'color':'red'});
+        jQuery(this).parent().animate({'width': '20px'}, 800, 'easeOutBack',function (){
+          jQuery(this).css({'color':'red'});
+        });},function() {
+        jQuery(this).parent().animate({'width': jQuery(this).parent().attr('begin-width') + 'px'}, 800, 'easeOutBack', function(){
+        jQuery(this).css({'color':'green'});
+      });
       });
       //e1.parentNode.removeChild(e1);
+      
+      $('#b1').click(function() {
+        // генерируем событие click для заголовка каждого блока
+        jQuery('.block > h2').trigger('click');
+      });
     </script>
   </body>
 </html>
